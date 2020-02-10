@@ -1,0 +1,28 @@
+package com.example.base.loadSir;
+
+import android.content.Context;
+import android.view.View;
+import android.widget.Toast;
+
+import com.example.base.R;
+import com.kingja.loadsir.callback.Callback;
+
+/**
+ * @author YangZhaoxin.
+ * @since 2020/1/11 15:30.
+ * email yangzhaoxin@hrsoft.net.
+ */
+
+public class TimeoutCallback extends Callback {
+
+    @Override
+    protected int onCreateView() {
+        return R.layout.layout_timeout;
+    }
+
+    @Override
+    protected boolean onReloadEvent(Context context, View view) {
+        Toast.makeText(context.getApplicationContext(),"Connecting to the network again!",Toast.LENGTH_SHORT).show();
+        return false;
+    }
+}

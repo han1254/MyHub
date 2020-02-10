@@ -1,0 +1,55 @@
+apply plugin: 'com.android.application'
+
+android {
+
+    dataBinding {
+        enabled = true
+    }
+
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
+    defaultConfig {
+        applicationId "com.example.myhub"
+        minSdkVersion 26
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField("String", "CLIENT_ID", "27e726cf87e36124eb72")
+            buildConfigField("String", "CLIENT_SECRET", "9d0cbce328b33e8fb5365fdbb4785cedef2b45ad")
+        }
+
+        debug {
+            buildConfigField("String", "CLIENT_ID", "\"27e726cf87e36124eb72\"")
+            buildConfigField("String", "CLIENT_SECRET", "\"9d0cbce328b33e8fb5365fdbb4785cedef2b45ad\"")
+        }
+    }
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    implementation project(path: ':base')
+
+    implementation 'com.github.ittianyu:BottomNavigationViewEx:2.0.4'
+    implementation 'com.android.support:design:28.0.0'
+    implementation 'me.majiajie:pager-bottom-tab-strip:2.2.0'
+    implementation 'com.github.zhaokaiqiang.klog:library:1.6.0'
+
+}

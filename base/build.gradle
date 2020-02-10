@@ -1,0 +1,69 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion "29.0.2"
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    dataBinding {
+        enabled true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation deps.androidx.appcompat
+    implementation deps.androidx.constraint_layout
+    testImplementation deps.androidx.test_junit
+    androidTestImplementation deps.androidx.androidx_test_junit
+    androidTestImplementation deps.androidx.androidx_test_espresso
+
+    api deps.tools.room
+    api deps.tools.room_for_rxjava2
+    api deps.tools.glide
+    api deps.tools.gson
+    api deps.tools.lifecycle_extension
+    api deps.tools.lifecycle_livedata
+    api deps.tools.lifecycle_viewmodel
+    api deps.tools.lifecycle_rx2livedata
+    api deps.tools.paging
+    api deps.tools.recyclerview
+    api deps.tools.viewpager2
+    api deps.tools.material
+    api deps.tools.navigation
+    api deps.tools.navigation_ui
+    api deps.tools.retrofit
+    api deps.tools.rxjava
+    api deps.tools.autodispose_archcompontents
+    api deps.tools.autodispose
+    api deps.tools.retrofit_rxjava_adapter
+    api deps.tools.okhttp
+    api deps.tools.okhttpinterceptor
+    api 'com.squareup.retrofit2:converter-gson:2.2.0'
+    api 'com.kingja.loadsir:loadsir:1.3.6'
+    api 'com.github.zhaokaiqiang.klog:library:1.6.0'
+
+
+    annotationProcessor deps.espresso.room_compiler
+    annotationProcessor deps.espresso.glide_compiler
+}

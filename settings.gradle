@@ -1,0 +1,65 @@
+include ':app', ":base"
+rootProject.name='MyHub'
+
+def deps = [:]
+
+def androidx = [
+        appcompat              : "androidx.appcompat:appcompat:${APP_COMPAT_VERSION}",
+        constraint_layout      : "androidx.constraintlayout:constraintlayout:${CONSTRAINT_LAYOUT_VERSION}",
+        test_junit             : "junit:junit:${TEST_JUNIT_VERSION}",
+        androidx_test_junit    : "androidx.test.ext:junit:${ANDROID_TEST_JUNIT}",
+        androidx_test_espresso : "androidx.test.espresso:espresso-core:${ANDROID_TEST_ESPRESSO}"
+]
+
+
+def tools = [
+        room                : "androidx.room:room-runtime:${ROOM_VERSION}",
+        room_for_rxjava2    : "androidx.room:room-rxjava2:${ROOM_VERSION}",
+        glide               : "com.github.bumptech.glide:glide:${GLIDE_VERSION}",
+        gson                : "com.google.code.gson:gson:${GSON_VERSION}",
+        lifecycle_extension : "androidx.lifecycle:lifecycle-extensions:${LIFECYCLE_VERSION}",
+        lifecycle_livedata  : "androidx.lifecycle:lifecycle-livedata-ktx:${LIFECYCLE_VERSION}",
+        lifecycle_viewmodel : "androidx.lifecycle:lifecycle-viewmodel-ktx:${LIFECYCLE_VERSION}",
+        lifecycle_rx2livedata         : "androidx.lifecycle:lifecycle-reactivestreams:${LIFECYCLE_VERSION}",
+        paging              : "androidx.paging:paging-runtime:${PAGING_VERSION}",
+        recyclerview        : "androidx.recyclerview:recyclerview:${RECYCLERVIEW_VERSION}",
+        viewpager2          : "androidx.viewpager2:viewpager2:${VIEWPAGER2_VERSION}",
+        material            : "com.google.android.material:material:${MATERIAL_VERSION}",
+        navigation          : "androidx.navigation:navigation-fragment-ktx:${NAVIGATION_VERSION}",
+        navigation_ui       : "androidx.navigation:navigation-ui-ktx:${NAVIGATION_VERSION}",
+
+        retrofit            : "com.squareup.retrofit2:retrofit:${RETROFIT_VERSION}",
+        rxjava              : "io.reactivex.rxjava2:rxjava:${RXJAVA_VERSION}",
+        rxandroid            : "io.reactivex.rxjava2:rxandroid:2.1.1",
+        autodispose_archcompontents : "com.uber.autodispose:autodispose-android-archcomponents:${AUTO_DISPOSE_VERSION}",
+        autodispose         : "com.uber.autodispose:autodispose:${AUTO_DISPOSE_VERSION}",
+        retrofit_rxjava_adapter : "com.squareup.retrofit2:adapter-rxjava2:${RETROFIT2RXADAPTER}",
+        okhttp              : "com.squareup.okhttp3:okhttp:${OKHTTP_VERSION}",
+        okhttpinterceptor   : "com.squareup.okhttp3:logging-interceptor:${OKHTTP_VERSION}"
+
+
+
+]
+
+def espresso = [
+        room_compiler  : "androidx.room:room-compiler:${ROOM_VERSION}",
+        glide_compiler : "com.github.bumptech.glide:compiler:${GLIDE_VERSION}"
+]
+
+def project = [
+        lib_mvvm : includeProject(":lib-neuq_mvvm")
+]
+
+deps.androidx = androidx
+deps.tools = tools
+deps.espresso = espresso
+deps.project = project
+
+
+gradle.ext.deps = deps
+
+def includeProject(def projectPath) {
+    include projectPath
+    return project(projectPath)
+}
+
