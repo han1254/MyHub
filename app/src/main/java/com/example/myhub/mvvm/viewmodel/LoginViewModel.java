@@ -1,10 +1,9 @@
 package com.example.myhub.mvvm.viewmodel;
 
-import com.example.base.model.SuperBaseModel;
 import com.example.base.viewmodel.MvvmNetworkViewModel;
-import com.example.myhub.mvvm.model.LoginModel;
+import com.example.myhub.mvvm.model.login.GetUserModel;
+import com.example.myhub.mvvm.model.login.LoginModel;
 
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 /**
@@ -18,24 +17,32 @@ public class LoginViewModel extends MvvmNetworkViewModel {
     private MutableLiveData<String> name;
     private MutableLiveData<String> password;
     private LoginModel loginModel;
-
-
+    private GetUserModel getUserModel;
+    private MutableLiveData<String> token;
 
     @Override
     protected void initModels() {
         name = new MutableLiveData<>();
         password = new MutableLiveData<>();
+        token = new MutableLiveData<>();
         loginModel = new LoginModel(name, password);
         registerModel("login", loginModel);
+        getUserModel = new GetUserModel(token, name);
+        registerModel("getUser", getUserModel);
+
     }
 
 
     public void startLogin(String name, String password) {
-        this.name.postValue(name);
-        this.password.postValue(password);
+        this.name.setValue(name);
+        this.password.setValue(password);
         getCachedDataAndLoad("login");
     }
 
+    public void getUser(String token) {
+        this.token.setValue(token);
+        getCachedDataAndLoad("getUser");
+    }
 
     public MutableLiveData<String> getName() {
         return name;
@@ -43,5 +50,9 @@ public class LoginViewModel extends MvvmNetworkViewModel {
 
     public MutableLiveData<String> getPassword() {
         return password;
+    }
+
+    public MutableLiveData<String> getToken() {
+        return token;
     }
 }

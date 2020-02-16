@@ -4,10 +4,11 @@ import com.example.base.view.fragment.MvvmNetworkFragment;
 import com.example.myhub.R;
 import com.example.myhub.databinding.FragmentMessageBinding;
 import com.example.myhub.mvvm.viewmodel.MessageViewModel;
-
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModel;
 
+/**
+ * 这个不要看了，没用这个
+ */
 public class MessageFragment extends MvvmNetworkFragment<FragmentMessageBinding, MessageViewModel> {
 
     @Override

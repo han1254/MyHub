@@ -1,26 +1,45 @@
 package com.example.myhub.mvvm.view.fragment;
 
-import android.content.Context;
-import android.net.Uri;
+import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.fragment.app.Fragment;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-import androidx.navigation.Navigation;
-import me.majiajie.pagerbottomtabstrip.NavigationController;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.util.Log;
 
 import com.example.base.view.fragment.MvvmNetworkFragment;
+import com.example.myhub.HubApp;
 import com.example.myhub.R;
 import com.example.myhub.databinding.FragmentSplashBinding;
+import com.example.myhub.mvvm.di.Named;
+import com.example.myhub.mvvm.view.activity.LoginActivity;
+import com.example.myhub.mvvm.view.activity.MainActivity;
 import com.example.myhub.mvvm.viewmodel.SplashViewModel;
+
+import javax.inject.Inject;
 
 
 public class SplashFragment extends MvvmNetworkFragment<FragmentSplashBinding, SplashViewModel> {
 
+    @Inject
+    @Named("token")
+    MutableLiveData<String> tokenLiveData;
+
+    @Inject
+    @Named("name_live")
+    MutableLiveData<String> mName;
+
+    @Inject
+    MutableLiveData<SplashFragment.TransType> mTransType;
+
+    public enum TransType {
+        LOGIN,
+
+        MAIN,
+
+        NONE
+    }
 
     @Override
     public int getLayoutId() {
@@ -49,9 +68,32 @@ public class SplashFragment extends MvvmNetworkFragment<FragmentSplashBinding, S
 
     @Override
     protected void initDataAndView() {
-        mViewDataBinding.btnSplash.setOnClickListener(v -> {
-            Navigation.findNavController(v).navigate(R.id.action_splashFragment_to_loginFragment2);
+        ((HubApp)getActivity().getApplication()).getSplashComponent().injectSplashView(this);
+        mViewModel.startVerify();
+
+        mTransType.observe(this, type -> {
+            switch (type) {
+                case MAIN:
+                    startMainActivity();
+                    break;
+                case LOGIN:
+                    transToLogin();
+                    break;
+                default:
+                    Log.d("UNKNOWN TYPE", "There is no such a type in TransType");
+                    break;
+            }
         });
+    }
+
+    private void transToLogin() {
+        startActivity(new Intent(getContext(), LoginActivity.class));
+        getActivity().finish();
+    }
+
+    private void startMainActivity() {
+        startActivity(new Intent(getActivity(), MainActivity.class));
+        getActivity().finish();
     }
 
     @Override
@@ -63,4 +105,7 @@ public class SplashFragment extends MvvmNetworkFragment<FragmentSplashBinding, S
     public void onLoadMoreEmpty() {
 
     }
+
+
+
 }

@@ -52,4 +52,11 @@ dependencies {
     implementation 'me.majiajie:pager-bottom-tab-strip:2.2.0'
     implementation 'com.github.zhaokaiqiang.klog:library:1.6.0'
 
+    debugImplementation 'com.amitshekhar.android:debug-db:1.0.4'
+
+    annotationProcessor  'android.arch.persistence.room:compiler:1.1.1'
+
+    implementation 'com.google.dagger:dagger:2.16'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.16'
+    implementation "com.github.bumptech.glide:okhttp3-integration:4.10.0"
 }

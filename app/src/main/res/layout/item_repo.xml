@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="clickListener"
+            type="android.view.View.OnClickListener"/>
+        <variable
+            name="repo"
+            type="com.example.myhub.mvvm.bean.Repo"
+            />
+        <variable
+            name="owner"
+            type="com.example.myhub.mvvm.bean.RepoOwner" />
+    </data>
+
+    <com.example.myhub.mvvm.view.MaskedCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/card_side_margin"
+        android:layout_marginEnd="@dimen/card_side_margin"
+        android:layout_marginBottom="@dimen/card_bottom_margin"
+        android:onClick="@{clickListener}"
+        app:cardElevation="@dimen/card_elevation"
+        app:cardPreventCornerOverlap="false">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:paddingLeft="10dp">
+
+                <ImageView
+                    android:id="@+id/item_repo_image"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:scaleType="centerCrop"
+                    app:imgUrlLoad="@{owner.avatar_url}"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"/>
+
+                <ImageView
+                    android:id="@+id/item_repo_title_logo"
+                    app:layout_constraintStart_toEndOf="@id/item_repo_image"
+                    app:layout_constraintTop_toTopOf="@id/item_repo_image"
+                    android:layout_marginStart="8dp"
+                    android:src="@drawable/ic_git2"
+                    android:layout_height="30dp"
+                    android:layout_width="30dp"/>
+                <TextView
+                    android:id="@+id/item_repo_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@{repo.name}"
+                    android:textAppearance="?attr/textAppearanceListItem"
+                    android:gravity="center_horizontal"
+                    app:layout_constraintStart_toEndOf="@id/item_repo_title_logo"
+                    app:layout_constraintTop_toTopOf="@id/item_repo_title_logo"
+                    app:layout_constraintBottom_toBottomOf="@id/item_repo_title_logo"
+                    android:layout_marginLeft="8dp"
+                    tools:text="Tomato"/>
+
+                <ImageView
+                    android:id="@+id/item_repo_star"
+                    app:layout_constraintLeft_toLeftOf="@id/item_repo_title_logo"
+                    app:layout_constraintTop_toBottomOf="@id/item_repo_title_logo"
+                    android:layout_marginTop="4dp"
+                    android:src="@drawable/ic_star"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp" />
+
+                <TextView
+                    android:id="@+id/item_repo_star_num"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@{repo.star_str}"
+                    android:textAppearance="?attr/textAppearanceListItem"
+                    android:gravity="center_horizontal"
+                    app:layout_constraintStart_toEndOf="@id/item_repo_star"
+                    app:layout_constraintTop_toTopOf="@id/item_repo_star"
+                    app:layout_constraintBottom_toBottomOf="@id/item_repo_star"
+                    android:layout_marginLeft="8dp"
+                    tools:text="Tomato"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.example.myhub.mvvm.view.MaskedCardView>
+
+</layout>

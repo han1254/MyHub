@@ -8,8 +8,11 @@ package com.example.base.networkfactory.retrofit;
  */
 public class GetApiService {
 
-    public static <T> T getApiService(Class<T> tClass, String baseUrl) {
-        return RetrofitUtils.getRetrofitBuilder(baseUrl).build().create(tClass);
+    public static <T> T getApiService(Class<T> tClass, String baseUrl, String token) {
+        return RetrofitUtils.getRetrofitBuilder(baseUrl, token).build().create(tClass);
     }
 
+    public static <T> T getApiService(Class<T> tClass, String baseUrl) {
+        return RetrofitUtils.getRetrofitBuilder(baseUrl, null).build().create(tClass);
+    }
 }

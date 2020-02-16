@@ -3,6 +3,7 @@ package com.example.base.model;
 import com.example.base.model.bean.BaseCachedData;
 import com.example.base.model.bean.BaseNetworkStatus;
 import com.example.base.network.NetWorkStatus;
+import com.example.base.utils.LiveDataUtil;
 
 /**
  * 不分页数据
@@ -18,24 +19,18 @@ public abstract class BaseModel<T> extends SuperBaseModel<T> {
      * @param data
      */
     protected void loadSuccess(T data) {
-        synchronized (this) {
-            // TODO: 统一切换到子线程 之后通过ThreadUtil统一管理线程池
-            mUIHandler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    mModelLiveData.postValue(data);
-                    mData.setData(data);
-                    BaseNetworkStatus status = mNetworkStatus.getValue();
-                    if (status == null) {
-                        status = new BaseNetworkStatus();
-                    }
-                    status.setStatus(NetWorkStatus.DONE);
-                    mNetworkStatus.postValue(status);
-                    // TODO: 缓存room
-                    saveData(data);
-                }
-            }, 0);
+
+        LiveDataUtil.setValue(mModelLiveData, data);
+        mData.setData(data);
+        BaseNetworkStatus status = mNetworkStatus.getValue();
+        if (status == null) {
+            status = new BaseNetworkStatus();
         }
+        status.setStatus(NetWorkStatus.DONE);
+        LiveDataUtil.setValue(mNetworkStatus, status);
+        // TODO: 缓存room
+        saveData(data);
+
     }
 
     /**

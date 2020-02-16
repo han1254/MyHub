@@ -3,6 +3,9 @@ package com.example.base.view.activity;
 import android.app.Application;
 import android.content.Intent;
 import android.os.Bundle;
+
+import com.example.base.BaseApplication;
+import com.example.base.utils.statusbar.StatusBarUtil;
 import com.example.base.viewmodel.IMvvmBaseViewModel;
 
 import androidx.annotation.LayoutRes;
@@ -42,12 +45,21 @@ public abstract class MvvmBaseActivity<V extends ViewDataBinding, VM extends IMv
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ((BaseApplication)getApplication()).addActivity(this);
+        if (!(getStatusBarColor() == 0)) {
+            StatusBarUtil.setStatusBarColor(this, getStatusBarColor());
+        }
         initParameters();
         initViewModel();
         performDataBinding();
         initDataAndView();
         setUIReaction();
     }
+
+    protected int getStatusBarColor() {
+        return 0;
+    }
+
 
     /**
      * TODO: 将基础的UI展示事件与ViewModel中的LiveData构成观察，一旦ViewModel中的相关LiveData变动，则会触发相应方法

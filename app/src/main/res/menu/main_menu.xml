@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group>
+        <item
+            android:id="@+id/main_about"
+            android:title="关于"
+            android:icon="@drawable/ic_about"/>
+
+        <item
+            android:title="退出登陆"
+            android:id="@+id/main_exit"
+            android:icon="@drawable/ic_exit"/>
+    </group>
+
+</menu>

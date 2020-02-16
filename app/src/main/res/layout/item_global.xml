@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+ <layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="globalNews"
+            type="com.example.myhub.mvvm.bean.GitHubEvent" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginTop="4dp"
+        android:background="#ffffff"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardCornerRadius="4dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+                <ImageView
+                    android:src="@drawable/ic_avatar_default"
+                    app:imgUrlLoad="@{globalNews.actor.avatar_url}"
+                    android:id="@+id/item_global_user_avatar"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:background="?android:selectableItemBackgroundBorderless"/>
+                <TextView
+                    android:id="@+id/item_global_user_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{globalNews.actor.login}"
+                    android:textSize="14sp"
+                    android:textColor="@color/colorVerdure"
+                    android:layout_marginStart="12dp"/>
+                <TextView
+                    android:id="@+id/time"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:layout_gravity="top"
+                    android:textSize="12sp"
+                    app:setAgoTime="@{globalNews.created_at}"
+                    android:textColor="?android:textColorSecondary"/>
+            </LinearLayout>
+
+            <TextView
+                android:text="@{globalNews.type}"
+                android:id="@+id/item_global_action"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:textColor="?android:textColorPrimary"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="4dp"/>
+
+            <TextView
+                android:text="@{globalNews.id}"
+                android:id="@+id/item_global_action_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="?android:textColorSecondary"
+                android:layout_marginBottom="4dp"
+                android:maxLines="4"
+                android:ellipsize="end"/>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</layout>
+

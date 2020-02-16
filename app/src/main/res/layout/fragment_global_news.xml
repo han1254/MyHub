@@ -1,17 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".mvvm.view.fragment.GlobalNewsFragment">
 
-  <RelativeLayout
+  <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+      android:id="@+id/global_swipe"
       android:layout_width="match_parent"
       android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:text="第一第一单元的、"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+      <androidx.recyclerview.widget.RecyclerView
+          android:id="@+id/global_recycler"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:scrollbarSize="5dp"
+          android:scrollbarThumbVertical="@color/colorPrimaryDark"
+          android:scrollbars="vertical"
+          tools:listitem="@layout/item_global"
+          app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
-  </RelativeLayout>
+      <ProgressBar
+          android:id="@+id/global_progress"
+          android:layout_width="60dp"
+          android:layout_height="60dp"
+          android:layout_centerHorizontal="true"
+          android:layout_alignParentBottom="true"
+          android:layout_marginBottom="30dp"/>
 
+    </RelativeLayout>
+
+  </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </layout>

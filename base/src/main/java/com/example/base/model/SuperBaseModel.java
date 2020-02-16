@@ -34,7 +34,6 @@ public abstract class SuperBaseModel<T> implements ISuperBaseModel {
     // TODO: 是否需要都用防倒灌的livedata
     protected MutableLiveData<T> mModelLiveData;
     protected MutableLiveData<BaseNetworkStatus> mNetworkStatus;
-    protected MutableLiveData<NetType> mNetType;
     //MediatorLiveData可以对livedata进行观察，不需要设置owner
     //TODO:可以通过这个变量来对网络状态进行观察，但是我把对网络状态的实时监测放在了view层
     protected MediatorLiveData<NetworkDetailType> networkDetailTypeWatcher;
@@ -45,7 +44,6 @@ public abstract class SuperBaseModel<T> implements ISuperBaseModel {
         mNetworkStatus = new MutableLiveData<>();
         mNetworkStatus.setValue(new BaseNetworkStatus());
         mData = new BaseCachedData<T>();
-        mNetType = new MutableLiveData<>();
     }
 
 
@@ -149,7 +147,7 @@ public abstract class SuperBaseModel<T> implements ISuperBaseModel {
             if (memoryData == null) {
                 Log.e("DATA NULL", "App memory doesn't contain the data you want");
             } else {
-                mModelLiveData.postValue(memoryData);
+                mModelLiveData.setValue(memoryData);
                 mData.setData(mModelLiveData.getValue());
             }
         }
@@ -159,7 +157,7 @@ public abstract class SuperBaseModel<T> implements ISuperBaseModel {
             if (spData == null) {
                 Log.e("DATA NULL", "Local Preference doesn't contain the data you want");
             } else {
-                mModelLiveData.postValue(spData);
+                mModelLiveData.setValue(spData);
                 mData.setData(mModelLiveData.getValue());
             }
         }
@@ -169,7 +167,7 @@ public abstract class SuperBaseModel<T> implements ISuperBaseModel {
             if (dataBaseData == null) {
                 Log.e("DATA NULL", "Local database doesn't contain the data you want");
             } else {
-                mModelLiveData.postValue(dataBaseData);
+                mModelLiveData.setValue(dataBaseData);
                 mData.setData(mModelLiveData.getValue());
             }
         }
